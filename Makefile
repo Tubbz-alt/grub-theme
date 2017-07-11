@@ -5,11 +5,11 @@ PREFIX = /usr/local
 CFG = $(wildcard cfg/*.cfg)
 
 THEME = \
-	$(wildcard cromnix-live/*.png) \
-	cromnix-live/theme.txt \
-	cromnix-live/u_vga16_16.pf2
+	$(wildcard cromnix/*.png) \
+	cromnix/theme.txt \
+	cromnix/u_vga16_16.pf2
 
-ICONS= $(wildcard cromnix-live/icons/*.png)
+ICONS= $(wildcard cromnix/icons/*.png)
 
 TZ = $(wildcard tz/*)
 
@@ -31,15 +31,15 @@ uninstall_common:
 	for f in ${LOCALES}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/locales/$$f; done
 
 install_cromnix:
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix-live
-	install -m0644 ${THEME} $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix-live
+	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix
+	install -m0644 ${THEME} $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix
 
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix-live/icons
-	install -m0644 ${ICONS} $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix-live/icons
+	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix/icons
+	install -m0644 ${ICONS} $(DESTDIR)$(PREFIX)/share/grub/themes/cromnix/icons
 
 uninstall_cromnix:
-	for f in ${THEME}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/cromnix-live/$$f; done
-	for f in ${ICONS}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/cromnix-live/icons/$$f; done
+	for f in ${THEME}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/cromnix/$$f; done
+	for f in ${ICONS}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/cromnix/icons/$$f; done
 
 install: install_common install_cromnix
 
