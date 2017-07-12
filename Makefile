@@ -30,7 +30,7 @@ uninstall_common:
 	for f in ${TZ}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/tz/$$f; done
 	for f in ${LOCALES}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/locales/$$f; done
 
-install_cromnix:
+install_artix:
 	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/artix
 	install -m0644 ${THEME} $(DESTDIR)$(PREFIX)/share/grub/themes/artix
 
@@ -41,9 +41,9 @@ uninstall_cromnix:
 	for f in ${THEME}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/artix/$$f; done
 	for f in ${ICONS}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/artix/icons/$$f; done
 
-install: install_common install_cromnix
+install: install_common install_artix
 
-uninstall: uninstall_common uninstall_cromnix
+uninstall: uninstall_common uninstall_artix
 
 dist:
 	git archive --format=tar --prefix=grub-theme-$(Version)/ $(Version) | gzip -9 > grub-theme-$(Version).tar.gz
