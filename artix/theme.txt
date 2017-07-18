@@ -11,9 +11,9 @@ title-text: ""
 	width = 75%
 	height = 60%
 	item_font = "u_vga16 16"
-	item_color = "#ddd"
+	item_color = "#1d5858"
 	selected_item_font = "u_vga16 16"
-	selected_item_color= "#f70"
+	selected_item_color= "#38aaaa"
 	selected_item_pixmap_style= "highlight_*.png"
 	icon_height = 28
 	icon_width = 28
@@ -27,16 +27,10 @@ title-text: ""
 	menu_pixmap_style = "menu_*.png"
 }
 
-#+ image {
-#	left = 0%
-#	top = 84%
-#        width=100%
-#	file = "logo.png"
-#}
-
-#+ image {
-#        left = 17%
-#        top = 15%
-#        file = "userpass.png"
-#}
-
++ image {
+	left = 65%
+        top = 65%
+        width = 100%
+	height = 100%
+	file = "logo.png"
+}
