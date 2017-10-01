@@ -11,9 +11,9 @@ title-text: ""
     width = 75%
     height = 60%
     item_font = "u_vga16 16"
-    item_color = "#ffffff"
+    item_color = "#f4f4f4"
     selected_item_font = "u_vga16 16"
-    selected_item_color= "#38aaaa"
+    selected_item_color= "#62c0f8"
     selected_item_pixmap_style= "highlight_*.png"
     icon_height = 28
     icon_width = 28
@@ -28,9 +28,9 @@ title-text: ""
 }
 
 + image {
-    left = 5%
-    top = 5%
-    width = 25%
-    height = 25%
+    left = 0%
+    top = 0%
+    width = 20%
+    height = 20%
     file = "logo.png"
 }
