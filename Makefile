@@ -1,6 +1,10 @@
-Version=0.3
+VERSION=0.3
 
+PKG = grub-theme
 PREFIX = /usr/local
+FMODE = -m0644
+DMODE = -dm0755
+RM = rm -f
 
 CFG = $(wildcard cfg/*.cfg)
 
@@ -16,37 +20,37 @@ TZ = $(wildcard tz/*)
 LOCALES = $(wildcard locales/*)
 
 install_common:
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/cfg
-	install -m0644 ${CFG} $(DESTDIR)$(PREFIX)/share/grub/cfg
+	install $(DMODE) $(DESTDIR)$(PREFIX)/share/grub/cfg
+	install $(FMODE) $(CFG) $(DESTDIR)$(PREFIX)/share/grub/cfg
 
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/tz
-	install -m0644 ${TZ} $(DESTDIR)$(PREFIX)/share/grub/tz
+	install $(DMODE) $(DESTDIR)$(PREFIX)/share/grub/tz
+	install $(FMODE) $(TZ) $(DESTDIR)$(PREFIX)/share/grub/tz
 
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/locales
-	install -m0644 ${LOCALES} $(DESTDIR)$(PREFIX)/share/grub/locales
+	install $(DMODE) $(DESTDIR)$(PREFIX)/share/grub/locales
+	install $(FMODE) $(LOCALES) $(DESTDIR)$(PREFIX)/share/grub/locales
 
 uninstall_common:
-	for f in ${CFG}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/cfg/$$f; done
-	for f in ${TZ}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/tz/$$f; done
-	for f in ${LOCALES}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/locales/$$f; done
+	for f in $(notdir $(CFG)); do $(RM) $(DESTDIR)$(PREFIX)/share/grub/cfg/$$f; done
+	for f in $(notdir $(TZ)); do $(RM) $(DESTDIR)$(PREFIX)/share/grub/tz/$$f; done
+	for f in $(notdir $(LOCALES)); do $(RM) $(DESTDIR)$(PREFIX)/share/grub/locales/$$f; done
 
-install_artix:
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/artix
-	install -m0644 ${THEME} $(DESTDIR)$(PREFIX)/share/grub/themes/artix
+install_theme:
+	install $(DMODE) $(DESTDIR)$(PREFIX)/share/grub/themes/artix
+	install $(FMODE) $(THEME) $(DESTDIR)$(PREFIX)/share/grub/themes/artix
 
-	install -dm0755 $(DESTDIR)$(PREFIX)/share/grub/themes/artix/icons
-	install -m0644 ${ICONS} $(DESTDIR)$(PREFIX)/share/grub/themes/artix/icons
+	install $(DMODE) $(DESTDIR)$(PREFIX)/share/grub/themes/artix/icons
+	install $(FMODE) $(ICONS) $(DESTDIR)$(PREFIX)/share/grub/themes/artix/icons
 
-uninstall_cromnix:
-	for f in ${THEME}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/artix/$$f; done
-	for f in ${ICONS}; do rm -f $(DESTDIR)$(PREFIX)/share/grub/theme/artix/icons/$$f; done
+uninstall_theme:
+	for f in $(notdir $(THEME)); do $(RM) $(DESTDIR)$(PREFIX)/share/grub/theme/artix/$$f; done
+	for f in $(notdir $(ICONS)); do $(RM) $(DESTDIR)$(PREFIX)/share/grub/theme/artix/icons/$$f; done
 
-install: install_common install_artix
+install: install_common install_theme
 
-uninstall: uninstall_common uninstall_artix
+uninstall: uninstall_common uninstall_theme
 
 dist:
-	git archive --format=tar --prefix=grub-theme-$(Version)/ $(Version) | gzip -9 > grub-theme-$(Version).tar.gz
-	gpg --detach-sign --use-agent grub-theme-$(Version).tar.gz
+	git archive --format=tar --prefix=$(PKG)-$(VERSION)/ $(VERSION) | gzip -9 > $(PKG)-$(VERSION).tar.gz
+	gpg --detach-sign --use-agent $(PKG)-$(VERSION).tar.gz
 
 .PHONY: install uninstall dist
